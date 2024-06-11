@@ -29,4 +29,15 @@ ROUND(AVG(emp.age)) AS average_age
 FROM Employees AS emp JOIN Employees AS man ON emp.reports_to = man.employee_id
 GROUP BY man.employee_id,man.name
 ORDER BY man.employee_id
-
+--EX6
+SELECT a.product_name, SUM(b.unit) AS unit
+FROM Products a JOIN Orders b ON a.product_id=b.product_id 
+WHERE EXTRACT(month FROM b.order_date) ='02' 
+AND EXTRACT(year FROM b.order_date) ='2020'
+GROUP BY a.product_name
+HAVING SUM(b.unit) >= 100
+--EX7
+SELECT a.page_id
+FROM pages a LEFT JOIN page_likes b ON a.page_id=b.page_id
+WHERE b.user_id IS NULL
+ORDER BY a.page_id
